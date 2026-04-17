@@ -1,0 +1,13 @@
+* { transition: all 0.4s ease; }
+body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; scroll-behavior: smooth; }
+
+/* Panic Theme */
+body.panic-active { background-color: #020617 !important; color: white; }
+body.panic-active .glass { background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid #1e293b; }
+body.panic-active input { background-color: #1e293b; border-color: #334155; color: white; }
+
+.glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+#panicBanner { display: none; }
+body.panic-active #panicBanner { display: block; background: linear-gradient(90deg, #ef4444, #b91c1c); }
+
+.dot { transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
