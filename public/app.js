@@ -16,7 +16,6 @@ async function fetchCourses() {
     const sem = semesterFilter.value;
     const search = searchInput.value;
     
-    // NOTE: We use a relative path /api/courses so it works on Render and Localhost automatically
     try {
         const response = await fetch(`/api/courses?stream=${stream}&semester=${sem}&panic=${panicActive}&search=${search}`);
         const data = await response.json();
@@ -34,8 +33,9 @@ function displayCourses(courses) {
         return;
     }
     courses.forEach(course => {
+        // We added 'course-card' class here to fix the visibility issue
         courseGrid.innerHTML += `
-            <div class="p-6 rounded-[2.5rem] border transition-all duration-300 ${panicActive ? 'bg-slate-800 border-slate-700 text-white shadow-none' : 'bg-white border-gray-100 shadow-xl shadow-gray-100/50'}">
+            <div class="course-card p-6 rounded-[2.5rem] border transition-all duration-300 ${panicActive ? '' : 'bg-white border-gray-100 shadow-xl shadow-gray-100/50'}">
                 <div class="flex justify-between mb-4">
                     <span class="text-[9px] font-bold px-2 py-1 rounded-md ${course.type === 'free' ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'}">
                         ${course.type.toUpperCase()}
@@ -45,7 +45,7 @@ function displayCourses(courses) {
                 <h3 class="text-lg font-bold mb-1">${course.title}</h3>
                 <p class="text-xs opacity-60 mb-6">${course.provider}</p>
                 <div class="flex justify-between items-center">
-                    <span class="text-xl font-bold">${course.type === 'paid' ? '₹' + (course.discountPrice || course.price) : 'FREE'}</span>
+                    <span class="price text-xl font-bold">${course.type === 'paid' ? '₹' + (course.discountPrice || course.price) : 'FREE'}</span>
                     <a href="${course.link}" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold transition ${panicActive ? 'bg-red-600 text-white' : 'bg-gray-900 text-white hover:bg-blue-600'}">Access Now</a>
                 </div>
             </div>`;
@@ -60,7 +60,6 @@ searchInput.addEventListener('input', () => {
 
 streamFilter.addEventListener('change', () => {
     const stream = streamFilter.value;
-    // Dynamic Filter Visibility
     if (stream === 'B.Tech' || stream === 'BCA') {
         semWrapper.style.display = 'flex';
         if(divider) divider.style.display = 'block';
@@ -89,6 +88,4 @@ panicBtn.addEventListener('click', () => {
 });
 
 semesterFilter.addEventListener('change', fetchCourses);
-
-// Initial Load
 fetchCourses();

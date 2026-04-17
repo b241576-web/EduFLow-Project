@@ -1,12 +1,37 @@
-* { transition: all 0.4s ease; }
-body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; scroll-behavior: smooth; }
+/* Smooth transitions */
+* { transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease; }
 
-/* Panic Theme */
-body.panic-active { background-color: #020617 !important; color: white; }
-body.panic-active .glass { background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid #1e293b; }
-body.panic-active input { background-color: #1e293b; border-color: #334155; color: white; }
+body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; }
 
+/* Panic Mode - The Page */
+body.panic-active { 
+    background-color: #020617 !important; 
+    color: white !important; 
+}
+
+/* Panic Mode - The Cards */
+/* This forces the card to turn dark in Panic Mode */
+body.panic-active .course-card {
+    background-color: #1e293b !important; 
+    border-color: #334155 !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+/* Ensure text inside Panic cards is visible */
+body.panic-active .course-card h3,
+body.panic-active .course-card p,
+body.panic-active .course-card .price {
+    color: white !important;
+}
+
+/* Navbar */
 .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+body.panic-active .glass { 
+    background: rgba(15, 23, 42, 0.8) !important; 
+    border-bottom: 1px solid #1e293b !important; 
+}
+
 #panicBanner { display: none; }
 body.panic-active #panicBanner { display: block; background: linear-gradient(90deg, #ef4444, #b91c1c); }
 
